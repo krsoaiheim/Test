@@ -12,12 +12,10 @@ import krsoaiheim.test.model.Item;
 import krsoaiheim.test.view.IListActivity;
 
 public class ListPresenter implements LoaderManager.LoaderCallbacks<List<Item>> {
-  private static final int ID = 1;
   private static final int LIST_PAGE_SIZE = 10;
   private final String code;
   private IListActivity view;
   private LoaderManager loaderManager;
-  private ListLoader listLoader;
   private boolean endReached = false;
 
 
@@ -59,6 +57,7 @@ public class ListPresenter implements LoaderManager.LoaderCallbacks<List<Item>> 
     }
     if (list == null) {
       view.decPage();
+      view.showMsg();
     }
     loaderManager.destroyLoader(loader.getId());
     view.setLoading(false);

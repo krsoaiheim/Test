@@ -1,7 +1,5 @@
 package krsoaiheim.test.model;
 
-import android.util.Log;
-
 import java.util.List;
 
 import krsoaiheim.test.TestApp;
@@ -25,37 +23,16 @@ public class DataManager implements ModelInteractor {
 
 
   @Override
-  public String auth(String login, String password) {
-    try {
-      String resp = apiService.auth(login, password);
-      Log.i("loader", "loadInBackground: "+resp);
-      if (resp.equals("-1")) {
-        return resp;
-      } else {
-        String code = parser.parseCode(resp);
-        return code;
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      return "-1";
-    }
+  public String auth(String login, String password) throws Exception {
+    String resp = apiService.auth(login, password);
+    return parser.parseCode(resp);
   }
 
 
   @Override
-  public List<Item> getList(String code, int page) {
-    try {
-      String resp = apiService.getList(code, page);
-      Log.i("loader", "loadInBackground: "+resp);
-      if (resp.equals("-1")) {
-        return null;
-      } else {
-        return parser.parseList(resp);
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-      return null;
-    }
+  public List<Item> getList(String code, int page) throws Exception {
+    String resp = apiService.getList(code, page);
+    return parser.parseList(resp);
   }
 
 
@@ -66,15 +43,8 @@ public class DataManager implements ModelInteractor {
 
 
   @Override
-  public List<Item> getListFromDB() {
-    return helper.getList();
-  }
-
-
-  @Override
   public void clearDB() {
     helper.clearDB();
-    Log.i("sql", "clearDB: cleared");
   }
 
 

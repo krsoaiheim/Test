@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class ListActivity extends AppCompatActivity implements IListActivity, IL
     String code = getIntent().getStringExtra("code");
     presenter = new ListPresenter(this, getLoaderManager(), code);
     llm = new LinearLayoutManager(this);
-    adapter = new ItemsAdapter(this, getLoaderManager());
+    adapter = new ItemsAdapter(this);
     adapter.setHasStableIds(true);
     listView.setAdapter(adapter);
     listView.setLayoutManager(llm);
@@ -63,6 +63,12 @@ public class ListActivity extends AppCompatActivity implements IListActivity, IL
   }
 
 
+  @Override
+  public void showMsg() {
+    Toast.makeText(this, "Не удалось загрузить список", Toast.LENGTH_SHORT).show();
+  }
+
+
   public void setLoading(boolean loading) {
     isLoading = loading;
   }
@@ -77,14 +83,17 @@ public class ListActivity extends AppCompatActivity implements IListActivity, IL
 
   @Override
   public void displayData(List<Item> data) {
-    listView.invalidate();
-    Log.i("loader", "displayData: "+data);
-    if (page == 1) {
-      adapter.clear();
+    if (data != null) {
+      listView.invalidate();
+      if (page == 1) {
+        adapter.clear();
+      }
+      Parcelable state = llm.onSaveInstanceState();
+      adapter.add(data);
+      llm.onRestoreInstanceState(state);
+    } else {
+      showMsg();
     }
-    Parcelable state = llm.onSaveInstanceState();
-    adapter.add(data);
-    llm.onRestoreInstanceState(state);
   }
 
 

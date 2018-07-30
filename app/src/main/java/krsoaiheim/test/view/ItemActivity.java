@@ -18,8 +18,6 @@ import krsoaiheim.test.presenter.ItemPresenter;
 public class ItemActivity extends AppCompatActivity implements IItem, OnMapReadyCallback {
   private TextView textId, textName, textCountry;
   private MapView map;
-  private String id;
-  private ItemPresenter presenter;
   private Long lon, lat;
 
 
@@ -27,12 +25,12 @@ public class ItemActivity extends AppCompatActivity implements IItem, OnMapReady
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_item);
-    id = getIntent().getStringExtra("id");
+    String id = getIntent().getStringExtra("id");
     textId = findViewById(R.id.id);
     textName = findViewById(R.id.name);
     textCountry = findViewById(R.id.country);
     map = findViewById(R.id.map);
-    presenter = new ItemPresenter(this, getLoaderManager());
+    ItemPresenter presenter = new ItemPresenter(this, getLoaderManager());
     presenter.loadItem(id);
     map.onCreate(new Bundle());
   }

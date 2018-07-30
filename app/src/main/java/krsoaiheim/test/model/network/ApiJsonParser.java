@@ -16,7 +16,7 @@ public class ApiJsonParser {
     if (status.equals("ok")) {
       return obj.getString("code");
     } else {
-      return "-1";
+      return null;
     }
   }
 

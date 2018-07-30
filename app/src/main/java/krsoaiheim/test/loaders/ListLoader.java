@@ -35,8 +35,12 @@ public class ListLoader extends AsyncTaskLoader<List<Item>> {
     if (page == 1) {
       interactor.clearDB();
     }
-    List<Item> list = interactor.getList(code, page);
-    Log.i("loader", "loadInBackground: "+list);
+    List<Item> list = null;
+    try {
+      list = interactor.getList(code, page);
+    } catch (Exception e) {
+      return null;
+    }
     interactor.saveListToDB(list);
     return list;
   }

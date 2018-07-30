@@ -30,7 +30,7 @@ public class DBHelper {
       values.put(DBFactory.COUNTRY, item.getCountry());
       values.put(DBFactory.LAT, item.getLatitude());
       values.put(DBFactory.LON, item.getLongitude());
-      long newRowId = writableDb.insert(TABLE_NAME, null, values);
+      writableDb.insert(TABLE_NAME, null, values);
     }
     writableDb.close();
   }
@@ -54,6 +54,7 @@ public class DBHelper {
       item.setName(cursor.getString(nameIndex));
       list.add(item);
     }
+    cursor.close();
     db.close();
     return list;
   }
@@ -77,6 +78,7 @@ public class DBHelper {
       item.setLatitude(cursor.getLong(latIndex));
       item.setLongitude(cursor.getLong(lonIndex));
     }
+    cursor.close();
     db.close();
     return item;
   }

@@ -6,6 +6,7 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,7 +17,6 @@ import krsoaiheim.test.loaders.AuthLoader;
 
 public class AuthActivity extends AppCompatActivity {
   private EditText loginEdit, passwordEdit;
-  private Button loginBtn;
   private String login, password;
 
 
@@ -26,7 +26,7 @@ public class AuthActivity extends AppCompatActivity {
     setContentView(R.layout.activity_auth);
     loginEdit = findViewById(R.id.login);
     passwordEdit = findViewById(R.id.password);
-    loginBtn = findViewById(R.id.login_btn);
+    Button loginBtn = findViewById(R.id.login_btn);
     loginBtn.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -60,7 +60,7 @@ public class AuthActivity extends AppCompatActivity {
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
-      if (data.equals("-1")) {
+      if (data == null) {
         Toast.makeText(AuthActivity.this, getString(R.string.auth_err), Toast.LENGTH_SHORT).show();
       } else {
         openList(data);

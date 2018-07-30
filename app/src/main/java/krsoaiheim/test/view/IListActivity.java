@@ -8,4 +8,5 @@ public interface IListActivity {
   void displayData(List<Item> data);
   void setLoading(boolean b);
   void decPage();
+  void showMsg();
 }

@@ -1,6 +1,5 @@
 package krsoaiheim.test.view;
 
-import android.app.LoaderManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,12 +15,10 @@ import krsoaiheim.test.model.Item;
 public class ItemsAdapter extends RecyclerView.Adapter<ItemsViewHolder> {
   private List<Item> list = new ArrayList<>();
   private IListener listener;
-  private LoaderManager loaderManager;
 
 
-  public ItemsAdapter(IListener listener, LoaderManager loaderManager) {
+  public ItemsAdapter(IListener listener) {
     this.listener = listener;
-    this.loaderManager = loaderManager;
     setHasStableIds(false);
   }
 

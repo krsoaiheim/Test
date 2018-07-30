@@ -2,6 +2,14 @@ package krsoaiheim.test.model;
 
 public class Item {
   private int id;
+  private String textId;
+  private String name;
+  private String country;
+  private long latitude;
+  private long longitude;
+  private String image;
+  public Item() {
+  }
 
 
   public String getTextId() {
@@ -11,18 +19,6 @@ public class Item {
 
   public void setTextId(String textId) {
     this.textId = textId;
-  }
-
-
-  private String textId;
-  private String name;
-  private String country;
-  private long latitude;
-  private long longitude;
-  private String image;
-
-
-  public Item() {
   }
 
 
